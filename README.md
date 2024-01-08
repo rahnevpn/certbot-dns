@@ -21,11 +21,15 @@ The execute the following to create python virtual environment:
 
 `/path/to/python3.12 -m venv .`
 
-`source bin/activate`
+```
+source bin/activate
+```
 
 And then install requests:
 
-`pip install requests`
+```
+pip install requests
+```
 
 ## Usage
 Run the script with the required arguments:
@@ -33,8 +37,9 @@ Run the script with the required arguments:
 python certbot-dns.py --domain <your_domain> --hostname <your_hostname> --email <your_email> [options]
 ```
 or:<br>
-`chmod +x certbot-dns.py auth-hook.py cleanup-hook.py`
-
+```
+chmod +x certbot-dns.py auth-hook.py cleanup-hook.py
+```
 Then change the "shebang" line in the beginning of the three files to match the path to python executable in your venv. and then run:
 
 ```
