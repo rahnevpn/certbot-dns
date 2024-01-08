@@ -23,6 +23,10 @@ The execute the following to create python virtual environment:
 
 `source bin/activate`
 
+And then install requests:
+
+`pip install requests`
+
 ## Usage
 Run the script with the required arguments:
 ```
