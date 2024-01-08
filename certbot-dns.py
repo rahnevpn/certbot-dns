@@ -52,7 +52,7 @@ def certbot_exec(renew, args):
         "--manual-auth-hook", "python auth-hook.py",
         "--manual-cleanup-hook", "python cleanup-hook.py",
         "--email", args.email,
-         "--agree-tos",
+        "--agree-tos",
     ]
     if not renew:
         command += ["-d", f"{args.hostname}.{args.domain}"]
