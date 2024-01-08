@@ -2,7 +2,7 @@
 
 This script automates the process of obtaining or renewing SSL/TLS certificates using Certbot with DNS challenges, specifically tailored for use with GoDaddy DNS.
 
-#Disclaimer
+# Disclaimer
 My programming skills are close to 0 :-) these scripts were created with the heavy usage of ChatGPT and GitHub co-pilot.
 
 ## Requirements
