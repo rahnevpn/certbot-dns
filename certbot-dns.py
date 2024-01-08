@@ -1,9 +1,9 @@
+#!/path/to/venv/certbot-dns/bin/python
 import subprocess
 import os
 import argparse
 import logging
 
-#!/path/to/venv/certbot-dns/bin/python
 # Parse command line arguments
 parser = argparse.ArgumentParser()
 parser.add_argument("--domain", help="Domain for the certificate", required=True)
