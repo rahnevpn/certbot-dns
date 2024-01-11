@@ -8,6 +8,7 @@ My programming skills are close to 0 :-) these scripts were created with the hea
 ## Requirements
 - Python 3 (I used 3.12)
 - `requests` library
+- `python-dotenv` library
 - Certbot
 - Access to GoDaddy API (API Key and Secret)
 
@@ -29,6 +30,9 @@ And then install requests:
 
 ```
 pip install requests
+```
+```
+pip install python-dotenv`
 ```
 
 ## Usage
