@@ -7,7 +7,6 @@ print("Cleanup-hook script started.")
 
 # Use environment variables set by Certbot
 fqdn = os.environ.get("CERTBOT_DOMAIN")
-godaddy_domain = os.environ.get("DOMAIN") 
 log_filename = os.environ.get("LOGFILENAME", "default-cleanup-hook.log")
 log_level = os.environ.get("LOGLEVEL", "INFO")
 log_file_path = os.environ.get("LOGFILEPATH", os.path.join(os.getcwd(), log_filename))
@@ -15,6 +14,13 @@ log_file_path = os.environ.get("LOGFILEPATH", os.path.join(os.getcwd(), log_file
 # GoDaddy API credentials from environment variables
 api_key = os.environ["GODADDY_API_KEY"]
 api_secret = os.environ["GODADDY_API_SECRET"]
+
+# Break down the base domain into subdomain and domain
+domain_parts = fqdn.split('.')
+if len(domain_parts) >= 3:
+    godaddy_domain = '.'.join(domain_parts[-2:])
+else:
+    godaddy_domain = fqdn
 
 # Configure logging level
 numeric_level = getattr(logging, log_level.upper(), None)
@@ -28,8 +34,6 @@ logging.basicConfig(filename=log_file_path, level=numeric_level, format='%(ascti
 subdomain = fqdn.split('.')[0]
 record_name = "_acme-challenge." + subdomain if subdomain != fqdn else "_acme-challenge"
 
-logging.info(f"Deleting DNS TXT record for {record_name}.{godaddy_domain}...")
-
 def delete_dns_record(domain, record_name):
     url = f"https://api.godaddy.com/v1/domains/{domain}/records/TXT/{record_name}"
     headers = {
@@ -42,7 +46,8 @@ def delete_dns_record(domain, record_name):
     except requests.exceptions.HTTPError as e:
         print("Failed to delete DNS record:", response.text)
         raise
-
+    
+logging.info(f"Deleting DNS TXT record for {record_name}.{godaddy_domain}...")
 delete_dns_record(godaddy_domain, record_name)
 
 logging.info("Cleanup-hook script finished.")

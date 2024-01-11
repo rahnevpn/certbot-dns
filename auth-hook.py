@@ -4,12 +4,11 @@ import requests
 import time
 import logging
 
-print("Auth-hook script started.")
+logging.info("Auth-hook script started.")
 
 # Environment variables set by Certbot and your script
 base_domain = os.environ.get("CERTBOT_DOMAIN")
 dns_key = os.environ.get("CERTBOT_VALIDATION")
-godaddy_domain = os.environ.get("DOMAIN")  # Domain managed in GoDaddy
 log_filename = os.environ.get("LOGFILENAME", "default-auth-hook.log")
 log_level = os.environ.get("LOGLEVEL", "INFO")
 log_file_path = os.environ.get("LOGFILEPATH", os.path.join(os.getcwd(), log_filename))
@@ -17,6 +16,13 @@ log_file_path = os.environ.get("LOGFILEPATH", os.path.join(os.getcwd(), log_file
 # GoDaddy API credentials from environment variables
 api_key = os.environ["GODADDY_API_KEY"]
 api_secret = os.environ["GODADDY_API_SECRET"]
+
+# Break down the base domain into subdomain and domain
+domain_parts = base_domain.split('.')
+if len(domain_parts) >= 3:
+    godaddy_domain = '.'.join(domain_parts[-2:])
+else:
+    godaddy_domain = base_domain
 
 # Determine the record name for the DNS TXT record
 subdomain = base_domain.split('.')[0]
@@ -29,8 +35,6 @@ if not isinstance(numeric_level, int):
 
 # Configure logging
 logging.basicConfig(filename=log_file_path, level=numeric_level, format='%(asctime)s %(levelname)s: %(message)s')
-
-logging.info(f"Creating DNS TXT record for {record_name}.{godaddy_domain} with value {dns_key}...")
 
 def create_dns_record(domain, record_name, record_value):
     url = f"https://api.godaddy.com/v1/domains/{domain}/records/TXT/{record_name}"
@@ -49,6 +53,7 @@ def create_dns_record(domain, record_name, record_value):
         logging.error("Failed to create DNS record:", response.text)
         raise
 
+logging.info(f"Creating DNS TXT record for {record_name}.{godaddy_domain} with value {dns_key}...")
 create_dns_record(godaddy_domain, record_name, dns_key)
 
 logging.info(f"Waiting for DNS propagation. This may take some time...")
