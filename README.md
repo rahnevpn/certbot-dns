@@ -48,25 +48,25 @@ Run the script with the necessary arguments:
 1. For issuing of a new certificate run:
 	
 	```
-	python certbot-dns.py --domain <your_domain> --hostname 	<your_hostname> --email <your_email> [options]
+	python certbot-dns.py --domain <your_domain> --hostname <your_hostname> --email <your_email> [options]
 	```
 
 	Alternatively, make the scripts executable and run:
 	
 	```
 	chmod +x certbot-dns.py auth-hook.py cleanup-hook.py
-	./certbot-dns.py --domain <your_domain> --hostname <your_hostname> --	email <your_email> [options]
+	./certbot-dns.py --domain <your_domain> --hostname <your_hostname> --email <your_email> [options]
 	```
 2. For renewing of existing certificates run:
 	
 	```
-	python certbot-dns.py
+	python certbot-dns.py [options]
 	```
 	Alternatively, make the scripts executable and run:
 	
 	```
 	chmod +x certbot-dns.py auth-hook.py cleanup-hook.py
-	./certbot-dns.py
+	./certbot-dns.py [options]
 	```
 
 
