@@ -2,6 +2,8 @@
 
 ## Introduction
 This project provides a script to automate the process of obtaining or renewing SSL/TLS certificates using Certbot with DNS challenges. It is specifically designed for integration with GoDaddy DNS. The script simplifies the certificate management process, making it accessible even to those with minimal programming experience.
+The script can only issue a certificate without installing it to Apache/Nginx and cannot issue wildcard certificates.
+
 
 # Disclaimer
 My programming skills are close to 0 :-) these scripts were created with the heavy usage of ChatGPT and GitHub co-pilot.
